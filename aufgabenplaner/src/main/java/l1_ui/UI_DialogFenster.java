@@ -1,4 +1,4 @@
-package aufgabenplaner;
+package l1_ui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;

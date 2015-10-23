@@ -1,4 +1,4 @@
-package aufgabenplaner;
+package l1_ui;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

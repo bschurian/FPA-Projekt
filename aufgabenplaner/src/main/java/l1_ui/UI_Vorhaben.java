@@ -1,4 +1,4 @@
-package aufgabenplaner;
+package l1_ui;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -49,7 +49,7 @@ public class UI_Vorhaben extends UI_DialogFenster{
 	}
 	@Override
 	protected void setEingabenExample() {
-		setEingaben("0","aufgabe", "dies \n ist ein bsp für di TextArea", new String[]{"1","2"}, "14", "1", "neu");
+		setEingaben("0","aufgabe", "dies \n ist ein bsp für die TextArea", new String[]{"1","2"}, "14", "1", "neu");
 		endTerminTextField.setText("23.10.2015");
 	}
 
