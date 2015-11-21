@@ -8,10 +8,10 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import lg.Client;
+import l2_lg.Client;
+import l3_da.Persistence;
 import multex.Exc;
 import multex.Failure;
-import db.Persistence;
 
 /** An application for management of clients. Uses a Swing UI. */
 public class AspectClientSwingApplication extends ClientSwingApplication {

@@ -1,2 +1,7 @@
 Persistence.ser
 target/
+aufgabe-DB/
+.settings/
+.classpath
+.project
+derby.log

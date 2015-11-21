@@ -6,7 +6,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public abstract class UI_DialogFenster extends JDialog{
+public abstract class UI_Aufgabe extends JDialog{
 	/**
 	 * 
 	 */
@@ -31,17 +33,17 @@ public abstract class UI_DialogFenster extends JDialog{
 	protected final JTextField restHTextField;
 	protected final JTextField istHTextField;
 	protected final JTextField statusTextField;
-	
+
 	protected final JPanel buttonPanel;
-	
+    protected final JButton erfassenButton;
+    protected final JButton aendernButton;
  
-	public UI_DialogFenster(String name) {
-		super();
+	public UI_Aufgabe(final String name) {
 		setTitle(name);
 		
 		setMinimumSize(new Dimension(400, 400));
 		
-		Container container = getContentPane();
+		final Container container = getContentPane();
 		container.setLayout(new BorderLayout());
 		
 		fieldPanel = new JPanel(new GridBagLayout());
@@ -73,22 +75,29 @@ public abstract class UI_DialogFenster extends JDialog{
 	    fieldPanel.add(new JLabel("Status"), c);	    
 	    statusTextField= new JTextField();
 	    fieldPanel.add(statusTextField, c);
-	    addLastTextField(fieldPanel);
-
-	    setEingabenExample();
 	    
 	    idTextfield.setEditable(false);
 	    vorhabenComboBox.setEditable(false);
-
-	    setEditables();
+		statusTextField.setEditable(false);
 	     
 	    container.add(fieldPanel, BorderLayout.CENTER);
 		
 	    buttonPanel = new JPanel(new FlowLayout());
-	    addButtons(buttonPanel);	    
+	    
+		erfassenButton = new JButton("Erfassen");
+	    buttonPanel.add(erfassenButton);
+	    aendernButton = new JButton("Aendern");
+	    buttonPanel.add(aendernButton);
+	    
 	    container.add(buttonPanel, BorderLayout.SOUTH);
 	    
-	    setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	}
+
+	/**
+	 * 
+	 */
+	protected void openUIAufgabe() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	    setSize(600, 400);
 	    setVisible(true);
 	}
@@ -97,7 +106,7 @@ public abstract class UI_DialogFenster extends JDialog{
 		idTextfield.setText(id);
 		titelTextField.setText(titel);
 		beschreibungTextArea.setText(beschreibung);
-		for(String item: vorhaben){
+		for(final String item: vorhaben){
 			vorhabenComboBox.addItem(item);
 		}
 		restHTextField.setText(restH);
@@ -108,8 +117,5 @@ public abstract class UI_DialogFenster extends JDialog{
 	protected abstract void setEingabenExample();
 	
 	protected abstract void setEditables() ;
-	
-	protected abstract void addLastTextField(JPanel fieldPanel);
-    protected abstract void addButtons(JPanel buttonPanel);
-	
+		
 }

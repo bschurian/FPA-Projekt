@@ -1,56 +1,91 @@
 package l1_ui;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class UI_Schritt extends UI_DialogFenster {
+import multex.Exc;
+
+public class UI_Schritt extends UI_Aufgabe {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected JTextField erledigtTextField;
+	final JTextField erledigtTextField;
+	JButton erledigenButton;
+	
 	
     public static void main(final String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
-             public void run() {
-                 new UI_Schritt(0);
-             }
+            public void run() {
+                 new UI_Schritt();
+            }
          });
      }
 	
-	public UI_Schritt(int id) {
+	public UI_Schritt() {
 		super("Schritt erfassen/aendern");
+		erledigtTextField= new JTextField();
+		addLastTextField();
+		erledigenButton= new JButton("Erledigen");
+		buttonPanel.add(erledigenButton);
+		openUIAufgabe();
+		setEingabenExample();
+		setEditables();
+		
+	    erfassenButton.setAction(new ExceptionReportingSwingAction("Erfassen") {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformedWithThrows(ActionEvent ev) throws Exception {
+				System.out.println("Erfassen des Schritts "+titelTextField.getText());
+			}
+		});
+	    
+	    aendernButton.setAction(new ExceptionReportingSwingAction("Aendern") {
+			
+			@Override
+			public void actionPerformedWithThrows(ActionEvent ev) throws Exception {
+				System.out.println("Aendern des Schritts "+titelTextField.getText());
+			}
+		});
+
+	    erledigenButton.setAction(new ExceptionReportingSwingAction("Erledigen") {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformedWithThrows(ActionEvent ev) throws Exception {
+				System.out.println("Erledigen des Schritts "+titelTextField.getText());
+				throw new Exc("Diese Aufgabe ist zu schwer.");
+			}
+		});
+
 	}
 
 	/**
 	 * 
 	 */
 	protected void setEditables() {
-		statusTextField.setEditable(false);
 		erledigtTextField.setEditable(false);
 	}
 
-	@Override
-	protected void addButtons(JPanel buttonPanel) {
-		JButton erfassenButton = new JButton("Erfassen");
-	    buttonPanel.add(erfassenButton);
-	    JButton aendernButton = new JButton("Aendern");
-	    buttonPanel.add(aendernButton);
-	    JButton erledigenButton = new JButton("Erledigen");
-	    buttonPanel.add(erledigenButton);
-	}
-
-	@Override
-	protected void addLastTextField(JPanel fieldPanel) {
+	protected void addLastTextField() {
 	    fieldPanel.add(new JLabel("Erledigt-Zeitpunkt"), c);	    
-	    erledigtTextField= new JTextField();
 	    fieldPanel.add(erledigtTextField, c);
 	}
 
-	@Override
 	protected void setEingabenExample() {
 		setEingaben("0","aufgabe", "dies \n ist ein bsp für die TextArea", new String[]{"1","2"}, "14", "1", "neu");
 		erledigtTextField.setText("ich hab probleme mit 1)");

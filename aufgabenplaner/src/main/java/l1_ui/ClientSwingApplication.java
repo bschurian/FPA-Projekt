@@ -15,12 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import lg.Client;
-import lg.Session;
-import lg.SessionImpl;
+import l2_lg.Client;
+import l2_lg.Session;
+import l2_lg.SessionImpl;
+import l3_da.Persistence;
 import multex.Exc;
 import multex.Failure;
-import db.Persistence;
 
 /**An application for management of clients. Uses a Swing UI.*/
 public class ClientSwingApplication {

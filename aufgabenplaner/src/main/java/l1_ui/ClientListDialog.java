@@ -21,8 +21,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import lg.Client;
-import lg.Session;
+import l2_lg.Client;
+import l2_lg.Session;
 import multex.Exc;
 import multex.Failure;
 

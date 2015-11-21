@@ -1,27 +1,50 @@
 package l1_ui;
 
+import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class UI_Vorhaben extends UI_DialogFenster{
+public class UI_Vorhaben extends UI_Aufgabe{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected JTextField endTerminTextField;
+	protected final JTextField endTerminTextField;
 
     public static void main(final String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
              public void run() {
-                 new UI_Vorhaben(0);
+                 new UI_Vorhaben();
              }
          });
      }
-  	public UI_Vorhaben(int id) {
+  	public UI_Vorhaben() {
 		super("Vorhaben erfassen/aendern");
+	    endTerminTextField= new JTextField();
+		addLastTextField();
+	    openUIAufgabe();
+	    setEingabenExample();
+	    setEditables();
+	    erfassenButton.setAction(new ExceptionReportingSwingAction("Erfassen") {
+			
+			@Override
+			public void actionPerformedWithThrows(ActionEvent ev) throws Exception {
+				System.out.println("Erfassen des Vorhabens "+titelTextField.getText());
+			}
+		});
+	    
+	    aendernButton.setAction(new ExceptionReportingSwingAction("Aendern") {
+			
+			@Override
+			public void actionPerformedWithThrows(ActionEvent ev) throws Exception {
+				System.out.println("Aendern des Vorhabens "+titelTextField.getText());
+			}
+		});
 	}
 
 	/**
@@ -30,21 +53,11 @@ public class UI_Vorhaben extends UI_DialogFenster{
 	protected void setEditables() {
 		restHTextField.setEditable(false);
 		istHTextField.setEditable(false);
-		statusTextField.setEditable(false);
 	}
 
-	@Override
-	protected void addButtons(JPanel buttonPanel) {
-		JButton erfassenButton = new JButton("Erfassen");
-	    buttonPanel.add(erfassenButton);
-	    JButton aendernButton = new JButton("Aendern");
-	    buttonPanel.add(aendernButton);
-	}
 
-	@Override
-	protected void addLastTextField(JPanel fieldPanel) {
+	protected void addLastTextField() {
 	    fieldPanel.add(new JLabel("Erledigt-Zeitpunkt"), c);	    
-	    endTerminTextField= new JTextField();
 	    fieldPanel.add(endTerminTextField, c);
 	}
 	@Override

@@ -1,4 +1,4 @@
-package db;
+package l3_da;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import lg.Client;
+import l2_lg.Client;
 import static multex.MultexUtil.create;
 import multex.Exc;
 import multex.Failure;

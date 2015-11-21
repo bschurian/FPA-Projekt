@@ -1,14 +1,13 @@
-package lg;
+package l2_lg;
 
 import java.util.Date;
 import java.util.List;
 
-import lg.Client.EmptyPhoneNumberExc;
-import lg.Client.IncredibleBirthDateExc;
-import lg.Client.PhoneNumberFormatExc;
+import l2_lg.Client.EmptyPhoneNumberExc;
+import l2_lg.Client.IncredibleBirthDateExc;
+import l2_lg.Client.PhoneNumberFormatExc;
+import l3_da.Persistence;
 import multex.Exc;
-
-import db.Persistence;
 
 public class SessionImpl implements Session {
 

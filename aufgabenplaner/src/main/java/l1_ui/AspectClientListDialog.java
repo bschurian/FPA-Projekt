@@ -9,8 +9,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import lg.Client;
-import lg.Session;
+import l2_lg.Client;
+import l2_lg.Session;
 import multex.Exc;
 import multex.Failure;
 

@@ -1,4 +1,4 @@
-package lg;
+package l2_lg;
 
 import java.io.Serializable;
 import java.util.Date;
