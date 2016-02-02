@@ -22,7 +22,8 @@ public class DaGenericImpl<E extends DmAufgabe> implements DaGeneric<E> {
 
 	@Override
 	public boolean save(E entity) {
-		if (entityManager.contains(entity)) {
+		if (entity.getId() != null) {
+			entityManager.merge(entity);
 			return false;
 		}
 		entityManager.persist(entity);

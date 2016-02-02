@@ -62,12 +62,13 @@ public class JpaDaFactoryTest {
 		assertEquals( 1L, schritt.getId().longValue());
 		daFactory.endTransaction(true);//commitet
 	}
-
-	public void t011Comm() { // 1. Entity persistieren in autom. Transaktion mit
+	
+	@Test
+	public void t012ReComm() { // rausholen und wieder speichern
 		daFactory.beginTransaction();
 		final DmSchritt schritt = daSchritt.find(1L);
-		assertEquals("Post abholen", schritt.getTitel());
-		daFactory.endTransaction(false);//commitet
+		daSchritt.save(schritt);
+		daFactory.endTransaction(true);//commitet
 	}
 
 	@Test

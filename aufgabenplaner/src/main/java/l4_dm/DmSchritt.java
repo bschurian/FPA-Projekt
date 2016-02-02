@@ -1,6 +1,8 @@
 package l4_dm;
 
 import java.sql.Date;
+import java.util.Collections;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -26,6 +28,11 @@ public class DmSchritt extends DmAufgabe {
 	@Override
 	public int getAnzahlTeile() {
 		return 0;
+	}
+
+	@Override
+	public List<DmAufgabe> getTeile(){
+		return Collections.<DmAufgabe>emptyList();
 	}
 
 	/**Liefert den Zeitpunkt, an dem diese Aufgabe als erledigt gebucht wurde.*/
@@ -55,5 +62,5 @@ public class DmSchritt extends DmAufgabe {
 			return DmAufgabeStatus.inBearbeitung;
 		}
 	}
-	
+
 }

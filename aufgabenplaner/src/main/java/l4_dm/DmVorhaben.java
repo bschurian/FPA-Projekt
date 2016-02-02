@@ -1,13 +1,15 @@
 package l4_dm;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**Datenmodellklasse für ein Vorhaben, welches aus mehreren Aufgaben besteht. Ohne Prüfungen und Folgeaktionen.*/
-@Entity  @Table(name="aufgabe") 
+@Entity @Table(name="aufgabe") 
 public class DmVorhaben extends DmAufgabe {
 	
 	/**In der Datenbank zu speichernder End-Termin*/
@@ -15,7 +17,7 @@ public class DmVorhaben extends DmAufgabe {
 	
 	/**Enthält die Teil-Aufgaben, welche zu diesem Vorhaben gehören. 
 	 * Wird nicht persistiert, sondern aus der inversen, persistierten Referenz ganzes berechnet.*/
-	protected transient List<DmAufgabe> teile;
+	protected transient List<DmAufgabe> teile = new ArrayList<DmAufgabe>();
 	
 	/**Enthält die Reststunden, die voraussichtlich noch für dieses Vorhaben aufgewendet werden müssen.
 	 * Wird nicht persistiert, sondern aus den Reststunden der Teil-Aufgaben berechnet.*/
@@ -47,15 +49,33 @@ public class DmVorhaben extends DmAufgabe {
 	public int getIstStunden() {
 		return istStunden;
 	}
+	
+	public void setRestStunden(int restStunden) {
+		this.restStunden = restStunden;
+	}
+
+	public void setIstStunden(int istStunden) {
+		this.istStunden = istStunden;
+	}
+
 
 	@Override
 	public int getAnzahlTeile() {
-		return teile==null ? 0 : teile.size();
+		return teile.size();
+	}
+
+	/**Liefert die Teil-Aufgaben, welche zu diesem Vorhaben gehören.*/
+	public List<DmAufgabe> getTeile(){
+		return teile;
 	}
 
 	@Override
 	public DmAufgabeStatus getStatus() {
 		return status;
+	}
+	
+	public void setStatus(DmAufgabeStatus status){
+		this.status = status;
 	}
 	
 }

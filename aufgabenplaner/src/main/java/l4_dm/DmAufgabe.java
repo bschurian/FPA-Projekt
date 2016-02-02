@@ -1,5 +1,7 @@
 package l4_dm;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -51,7 +53,11 @@ public abstract class DmAufgabe {
 	/**Liefert die Anzahl von Teilaufgaben dieser Aufgabe. Bei einem Schritt ist diese 0.*/
 	public abstract int getAnzahlTeile();
 	
-	/**Liefert den Status der Aufgabe. Bei einem Vorhaben wird er aus den Statuswerten der Teil-Aufgaben ermittelt.*/
+	/**Liefert die Teilaufgaben von dieser Aufgabe. Bei einem Schritt ist die Ergebnisliste leer und nicht änderbar.
+	 * @since 2015-12-03*/
+	public abstract List<DmAufgabe> getTeile();
+	
+	/**Liefert den Status der Aufgabe. Bei einem Vorhaben sollte er aus den Statuswerten der Teil-Aufgaben abgeleitet sein.*/
 	public abstract DmAufgabeStatus getStatus();
 	
 	public void setTitel(String titel) {
@@ -62,6 +68,11 @@ public abstract class DmAufgabe {
 	}
 	public void setGanzes(DmVorhaben ganzes) {
 		this.ganzes = ganzes;
-	} 
+	}
+	
+	/**Liefert eine knappe String-Darstellung dieses Objekts mit Klassennamen (ohne Dm), id und titel des Objekts.
+	 * @since 2015-12-03*/
+	@Override
+	public String toString(){return getClass().getSimpleName().substring(2) + "(" + getId() + ", " + getTitel() + ")";}
 
 }

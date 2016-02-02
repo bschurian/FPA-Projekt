@@ -2,6 +2,8 @@ package l1_ui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,6 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
+import l2_lg.LgSession;
+import l2_lg.LgSessionImpl;
+import l3_da.DaFactoryForJPA;
 import l4_dm.DmAufgabe;
 import l4_dm.DmAufgabeStatus;
 import l4_dm.DmSchritt;
@@ -28,8 +33,10 @@ public class UI_AufgabenTable extends JTable {
 		// creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				final UI_AufgabenTable table = new UI_AufgabenTable(null);
-				table.fillWithTestData();
+				final LgSession lg = new LgSessionImpl(new DaFactoryForJPA());
+				final UI_AufgabenTable table = new UI_AufgabenTable((DmAufgabe[])lg.obersteAufgabenUndAlleVorhabenLiefern().aufgaben.toArray());
+				
+//				table.fillWithTestData();
 				final JDialog thisDialog = new JDialog();
 				thisDialog.setTitle("Test UiAufgabenTable");
 				final Container container = thisDialog.getContentPane();
@@ -37,6 +44,16 @@ public class UI_AufgabenTable extends JTable {
 				container.add(scrollPane, BorderLayout.CENTER);
 				thisDialog.pack();
 				thisDialog.setVisible(true);
+				ActionListener aListener = new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(e.getActionCommand().equals("UPDATE")){
+							
+						}
+						
+					}
+				};
 			}
 		});
 	}
